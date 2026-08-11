@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kabir Yusuf — Software Engineer</title>
+<style>
+  :root{
+    --blueprint-navy: #0e1b2b;
+    --blueprint-line: #24405f;
+    --paper: #edf1f5;
+    --paper-dim: #9fb0c2;
+    --signal-amber: #e8a33d;
+    --signal-cyan: #63c9d6;
+    --radius: 3px;
+  }
+
+  *{ box-sizing:border-box; margin:0; padding:0; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:
+      radial-gradient(ellipse 900px 600px at 15% -5%, rgba(99,201,214,0.08), transparent 60%),
+      radial-gradient(ellipse 700px 500px at 100% 30%, rgba(232,163,61,0.06), transparent 55%),
+      var(--blueprint-navy);
+    color:var(--paper);
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    line-height:1.6;
+  }
+
+  ::selection{ background:var(--signal-amber); color:var(--blueprint-navy); }
+
+  .mono{ font-family:'JetBrains Mono', 'SF Mono', Consolas, monospace; }
+
+  a{ color:var(--signal-cyan); text-decoration:none; }
+  a:hover{ text-decoration:underline; }
+
+  a:focus-visible, button:focus-visible{
+    outline: 2px solid var(--signal-amber);
+    outline-offset: 3px;
+  }
+
+  .wrap{
+    max-width: 980px;
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- NAV ---------- */
+  nav{
+    position:sticky; top:0; z-index:50;
+    background: rgba(14,27,43,0.88);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--blueprint-line);
+  }
+  nav .wrap{
+    display:flex; align-items:center; justify-content:space-between;
+    padding-top:16px; padding-bottom:16px;
+  }
+  .brand{
+    font-family:'JetBrains Mono', monospace;
+    font-size:14px; letter-spacing:0.06em; color:var(--paper);
+  }
+  .brand span{ color:var(--signal-amber); }
+  .navlinks{ display:flex; gap:28px; }
+  .navlinks a{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.05em;
+    color:var(--paper-dim);
+    text-transform:uppercase;
+  }
+  .navlinks a:hover{ color:var(--signal-cyan); text-decoration:none; }
+
+  @media (max-width:640px){ .navlinks{ display:none; } }
+
+  /* ---------- HERO ---------- */
+  header.hero{
+    padding: 88px 0 64px;
+    border-bottom: 1px solid var(--blueprint-line);
+  }
+  .eyebrow{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    letter-spacing:0.14em;
+    text-transform:uppercase;
+    color:var(--signal-amber);
+    margin-bottom:18px;
+    display:flex; align-items:center; gap:10px;
+  }
+  .eyebrow::before{
+    content:''; width:8px; height:8px; background:var(--signal-amber);
+    display:inline-block; border-radius:50%;
+    box-shadow:0 0 0 4px rgba(232,163,61,0.15);
+  }
+  h1{
+    font-size: clamp(32px, 5.2vw, 54px);
+    font-weight: 700;
+    letter-spacing:-0.01em;
+    max-width: 16ch;
+    color: var(--paper);
+  }
+  h1 em{
+    font-style:normal;
+    color: var(--signal-cyan);
+  }
+  .hero-sub{
+    margin-top:22px;
+    max-width:58ch;
+    font-size:17px;
+    color:var(--paper-dim);
+  }
+  .hero-cta{
+    margin-top:34px;
+    display:flex; gap:16px; flex-wrap:wrap;
+  }
+  .btn{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    padding:12px 20px;
+    border-radius:var(--radius);
+    border:1px solid var(--blueprint-line);
+  }
+  .btn.primary{
+    background:var(--signal-amber);
+    color:var(--blueprint-navy);
+    border-color:var(--signal-amber);
+    font-weight:600;
+  }
+  .btn.primary:hover{ text-decoration:none; filter:brightness(1.08); }
+  .btn.ghost{ color:var(--paper); }
+  .btn.ghost:hover{ text-decoration:none; border-color:var(--signal-cyan); color:var(--signal-cyan); }
+
+  /* ---------- SIGNATURE DIAGRAM ---------- */
+  .pipeline{
+    margin-top:56px;
+  }
+  .pipeline-label{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--paper-dim);
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    margin-bottom:10px;
+  }
+  .pipeline svg{ width:100%; height:auto; display:block; }
+  .node-box{
+    fill: rgba(36,64,95,0.35);
+    stroke: var(--blueprint-line);
+    stroke-width:1.2;
+  }
+  .node-title{
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px;
+    fill: var(--paper);
+    font-weight:600;
+  }
+  .node-sub{
+    font-family:'Inter', sans-serif;
+    font-size:10.5px;
+    fill: var(--paper-dim);
+  }
+  .flow-line{
+    stroke: var(--signal-cyan);
+    stroke-width:1.4;
+    fill:none;
+    stroke-dasharray: 5 5;
+  }
+  .flow-pulse{
+    fill: var(--signal-amber);
+  }
+  @media (prefers-reduced-motion: no-preference){
+    .flow-pulse{ animation: travel 3.2s linear infinite; }
+    .flow-pulse.d2{ animation-delay: 1.6s; }
+  }
+  @keyframes travel{
+    0%{ offset-distance: 0%; opacity:0; }
+    5%{ opacity:1; }
+    95%{ opacity:1; }
+    100%{ offset-distance: 100%; opacity:0; }
+  }
+  .path-a{ offset-path: path('M 40 60 H 300'); }
+  .path-b{ offset-path: path('M 340 60 H 600'); }
+  .path-c{ offset-path: path('M 640 60 H 900'); }
+
+  /* ---------- SECTIONS ---------- */
+  section{ padding: 64px 0; border-bottom: 1px solid var(--blueprint-line); }
+  section:last-of-type{ border-bottom:none; }
+
+  .section-head{
+    display:flex; align-items:baseline; gap:14px;
+    margin-bottom:32px;
+  }
+  .section-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--blueprint-line);
+    font-size:13px;
+  }
+  h2{
+    font-size: 22px;
+    letter-spacing:-0.01em;
+    text-transform:uppercase;
+    color:var(--paper);
+  }
+
+  .about-grid{
+    display:grid;
+    grid-template-columns: 1.4fr 1fr;
+    gap: 48px;
+  }
+  @media (max-width:760px){ .about-grid{ grid-template-columns:1fr; } }
+
+  .about-body p{ color:var(--paper-dim); margin-bottom:16px; max-width:62ch; }
+  .about-body strong{ color:var(--paper); font-weight:600; }
+
+  .stat-card{
+    border:1px solid var(--blueprint-line);
+    border-radius:var(--radius);
+    padding:18px 20px;
+    margin-bottom:14px;
+    background: rgba(36,64,95,0.18);
+  }
+  .stat-num{
+    font-family:'JetBrains Mono', monospace;
+    color:var(--signal-cyan);
+    font-size:22px;
+    font-weight:700;
+  }
+  .stat-label{ font-size:12.5px; color:var(--paper-dim); margin-top:4px; }
+
+  /* skills */
+  .skill-groups{
+    display:grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+  }
+  @media (max-width:760px){ .skill-groups{ grid-template-columns: 1fr 1fr; } }
+  @media (max-width:480px){ .skill-groups{ grid-template-columns: 1fr; } }
+
+  .skill-card{
+    border:1px solid var(--blueprint-line);
+    border-radius:var(--radius);
+    padding:18px 18px 20px;
+    background: rgba(14,27,43,0.4);
+  }
+  .skill-card h3{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    letter-spacing:0.08em;
+    text-transform:uppercase;
+    color:var(--signal-amber);
+    margin-bottom:12px;
+  }
+  .skill-card ul{ list-style:none; }
+  .skill-card li{
+    font-size:14px;
+    color:var(--paper);
+    padding:5px 0;
+    border-top:1px dashed var(--blueprint-line);
+  }
+  .skill-card li:first-child{ border-top:none; }
+
+  .skill-card.ai{
+    border-color: var(--signal-cyan);
+    background: rgba(99,201,214,0.06);
+  }
+  .skill-card.ai h3{ color:var(--signal-cyan); }
+
+  /* experience timeline */
+  .timeline{ position:relative; padding-left:26px; }
+  .timeline::before{
+    content:'';
+    position:absolute; left:6px; top:6px; bottom:6px;
+    width:1px; background:var(--blueprint-line);
+  }
+  .tl-item{ position:relative; margin-bottom:38px; }
+  .tl-item:last-child{ margin-bottom:0; }
+  .tl-item::before{
+    content:'';
+    position:absolute; left:-26px; top:4px;
+    width:11px; height:11px; border-radius:50%;
+    background:var(--blueprint-navy);
+    border:2px solid var(--signal-amber);
+  }
+  .tl-meta{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11.5px;
+    color:var(--paper-dim);
+    text-transform:uppercase;
+    letter-spacing:0.05em;
+    margin-bottom:4px;
+  }
+  .tl-role{ font-size:17px; font-weight:600; color:var(--paper); margin-bottom:2px; }
+  .tl-org{ font-size:14px; color:var(--signal-cyan); margin-bottom:10px; }
+  .tl-item ul{ padding-left:18px; }
+  .tl-item li{ font-size:14.5px; color:var(--paper-dim); margin-bottom:6px; }
+
+  /* build-log / next chapter */
+  .buildlog{
+    border:1px solid var(--blueprint-line);
+    border-radius:var(--radius);
+    padding:24px 26px;
+    background: rgba(36,64,95,0.15);
+  }
+  .buildlog-line{
+    font-family:'JetBrains Mono', monospace;
+    font-size:13px;
+    color:var(--paper-dim);
+    margin-bottom:8px;
+  }
+  .buildlog-line .tag{ color:var(--signal-amber); }
+  .buildlog-line .tag2{ color:var(--signal-cyan); }
+
+  footer{
+    padding: 48px 0 60px;
+    text-align:center;
+  }
+  footer .brand{ margin-bottom:14px; }
+  .footlinks{ display:flex; gap:22px; justify-content:center; margin-bottom:16px; flex-wrap:wrap; }
+  .footlinks a{ font-family:'JetBrains Mono', monospace; font-size:12.5px; color:var(--paper-dim); }
+  .footlinks a:hover{ color:var(--signal-cyan); }
+  .footnote{ font-size:12px; color:var(--blueprint-line); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap">
+    <div class="brand">KABIR YUSUF</div>
+    <div class="navlinks">
+      <a href="#about">About</a>
+      <a href="#skills">Stack</a>
+      <a href="#experience">Experience</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="eyebrow mono">Software Engineer</div>
+    <h1>I build backend systems that hold up in production —<br> and use <em>AI</em> to build them better.</h1>
+    <p class="hero-sub">
+      5+ years shipping Java / Spring Boot backends for companies in the US and Nigeria — microservice migrations, Kafka-driven pipelines, secure APIs, and payment system integrations using Python and FastAPI. For the past year, AI tooling (Claude, Claude Code) has become part of how I design, debug, and test every one of those systems.
+    </p>
+    <div class="hero-cta">
+      <a class="btn primary" href="#contact">Get in touch</a>
+      <a class="btn ghost" href="https://github.com/KabirYusuf" target="_blank" rel="noopener">View GitHub ↗</a>
+      <a class="btn ghost" href="https://www.linkedin.com/in/kabir-yusuf/" target="_blank" rel="noopener">View LinkedIn ↗</a>
+    </div>
+  </div>
+</header>
+
+<section id="about">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">01</span>
+      <h2>About</h2>
+    </div>
+    <div class="about-grid">
+      <div class="about-body">
+        <p><strong>I'm Kabir Yusuf</strong>, a software engineer with 5+ years building backend systems — REST APIs, microservices, message-driven pipelines — for companies including TightLine (USA) and TravelWay (Lagos). My core stack is Java and Spring Boot, with working experience in Python, Kafka, PostgreSQL, MySQL, and Docker.</p>
+        <p>Over the past year, AI-assisted development has become a real part of how I work — not a side experiment. I use <strong>Claude and Claude Code</strong> daily for system design, code review, debugging, refactoring, and test generation, and I've seen firsthand how much faster and more consistent delivery gets when AI is used with real engineering judgment behind it.</p>
+        <p>I bring a combination of solid engineering fundamentals, analytical thinking, and business awareness to the products I help build — backed by a Computer Science degree and training in business management and entrepreneurship.</p>
+      </div>
+      <div>
+        <div class="stat-card">
+          <div class="stat-num mono">5+ yrs</div>
+          <div class="stat-label">backend engineering, Java / Spring Boot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num mono">2</div>
+          <div class="stat-label">countries — production experience in the US and Nigerian markets</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num mono">1 yr+</div>
+          <div class="stat-label">daily, hands-on use of Claude / Claude Code in real engineering work</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="skills">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">02</span>
+      <h2>Stack</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3>Languages</h3>
+        <ul>
+          <li>Java</li>
+          <li>Python</li>
+          <li>JavaScript</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Backend Frameworks</h3>
+        <ul>
+          <li>Spring Boot</li>
+          <li>Django, Django REST Framework</li>
+          <li>FastAPI</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Frontend</h3>
+        <ul>
+          <li>React</li>
+          <li>Vue.js</li>
+          <li>Angular</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Data</h3>
+        <ul>
+          <li>PostgreSQL, MySQL, MongoDB</li>
+          <li>Redis, Kafka, RabbitMQ</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Engineering Practice</h3>
+        <ul>
+          <li>Microservices, event-driven design</li>
+          <li>TDD / BDD, JUnit, Mockito</li>
+          <li>Docker, Git, CI-style delivery</li>
+        </ul>
+      </div>
+      <div class="skill-card ai">
+        <h3>AI-Assisted Development</h3>
+        <ul>
+          <li>Claude &amp; Claude Code — daily use</li>
+          <li>AI-assisted design, debugging, refactoring</li>
+          <li>Test generation &amp; documentation</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Grounding</h3>
+        <ul>
+          <li>BSc Computer Science</li>
+          <li>Business Management &amp; Entrepreneurship, Henley</li>
+          <li>Backend facilitator / mentor</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="projects">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">03</span>
+      <h2>Projects</h2>
+    </div>
+    <div class="skill-groups">
+      <div class="skill-card">
+        <h3>Library Management System</h3>
+        <ul>
+          <li>Java</li>
+          <li><a href="https://github.com/KabirYusuf/library-management-system" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Transport Management System</h3>
+        <ul>
+          <li>Python</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>E-Commerce Platform</h3>
+        <ul>
+          <li>Java</li>
+          <li><a href="https://github.com/KabirYusuf/e-commerce" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Todo Backend</h3>
+        <ul>
+          <li>Java</li>
+          <li><a href="https://github.com/KabirYusuf/todo-backEnd" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Unicoin — Crypto Exchange</h3>
+        <ul>
+          <li>Team-built cryptocurrency exchange application</li>
+          <li>Java</li>
+          <li><a href="https://github.com/KabirYusuf/unicoin-project-team-two" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Credit Card Verification (FE)</h3>
+        <ul>
+          <li>Frontend app for credit card verification</li>
+          <li>JavaScript</li>
+          <li><a href="https://github.com/KabirYusuf/levelUpCCVerification-FE" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>ArticleBlog</h3>
+        <ul>
+          <li>Blog application built with Vue.js and Spring Boot</li>
+          <li><a href="https://github.com/KabirYusuf/ArticleBlog" target="_blank" rel="noopener">View repo ↗</a></li>
+        </ul>
+      </div>
+    </div>
+    <p style="margin-top:20px; font-size:13.5px; color:var(--paper-dim);">
+      More on <a href="https://github.com/KabirYusuf" target="_blank" rel="noopener">GitHub — 43 repositories ↗</a>
+    </p>
+  </div>
+</section>
+
+<section id="experience">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="section-num mono">04</span>
+      <h2>Experience</h2>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="tl-meta mono">May 2024 — Present · Contract</div>
+        <div class="tl-role">Software Engineer</div>
+        <div class="tl-org">TightLine, USA</div>
+        <ul>
+          <li>Contributed to migration of microservice-based applications, improving maintainability and service continuity.</li>
+          <li>Applied AI-assisted development tools to accelerate implementation and improve code quality.</li>
+          <li>Used Kafka to optimize message-driven processing and throughput across distributed services.</li>
+          <li>Built and maintained scheduled jobs for recurring business operations.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta mono">Jan 2023 — Present · Contract</div>
+        <div class="tl-role">Software Engineer</div>
+        <div class="tl-org">TravelWay, Lagos</div>
+        <ul>
+          <li>Integrated payment system using Python and FastAPI.</li>
+          <li>Built secure REST APIs with Java, Spring Boot, and JWT.</li>
+          <li>Wrote unit and integration tests with JUnit and Mockito, following BDD, to speed up development cycles.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta mono">Feb — Aug 2023</div>
+        <div class="tl-role">Software Engineer</div>
+        <div class="tl-org">Learnspace Africa, Lagos</div>
+        <ul>
+          <li>Implemented a scalable backend architecture using a multi-module model.</li>
+          <li>Developed secure REST APIs with Java, Spring Boot, and JWT; documented endpoints in Postman.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta mono">Feb — Aug 2023</div>
+        <div class="tl-role">Java &amp; Spring Boot Facilitator</div>
+        <div class="tl-org">Semicolon Africa, Lagos</div>
+        <ul>
+          <li>Taught Java fundamentals and UML system design (class, use-case, ER diagrams) to new developers.</li>
+        </ul>
+      </div>
+      <div class="tl-item">
+        <div class="tl-meta mono">Feb 2019 — Mar 2022</div>
+        <div class="tl-role">Software Developer</div>
+        <div class="tl-org">Enovations Tech, Abuja</div>
+        <ul>
+          <li>Built web applications with HTML, CSS, PHP, and MySQL, delivering tailored solutions for cross-functional teams.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer id="contact">
+  <div class="wrap">
+    <div class="brand">KABIR YUSUF</div>
+    <div class="footlinks">
+      <a href="https://www.linkedin.com/in/kabir-yusuf/" target="_blank" rel="noopener">LinkedIn ↗</a>
+      <a href="tel:+2348065923833">+234 806 592 3833</a>
+      <a href="mailto:kabir.yusuf@example.com">Email</a>
+    </div>
+    <div class="footnote mono">Abuja, Nigeria — built with Java, Spring Boot, and AI-assisted development.</div>
+  </div>
+</footer>
+
+</body>
+</html>
