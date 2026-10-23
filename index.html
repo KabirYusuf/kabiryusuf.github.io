@@ -3,7 +3,11 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Kabir Yusuf — Software Engineer</title>
+<title>Kabir Yusuf — Software &amp; Automation Engineer</title>
+<meta name="description" content="Kabir Yusuf: Software and Automation Engineer and Certified Claude Developer (CCDV-F) building Python/FastAPI backends and AI-powered automation with Claude.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root{
     --blueprint-navy: #0e1b2b;
@@ -97,7 +101,8 @@
     font-size: clamp(32px, 5.2vw, 54px);
     font-weight: 700;
     letter-spacing:-0.01em;
-    max-width: 16ch;
+    line-height:1.15;
+    max-width: 20ch;
     color: var(--paper);
   }
   h1 em{
@@ -266,6 +271,63 @@
   }
   .skill-card.ai h3{ color:var(--signal-cyan); }
 
+  /* certification badge */
+  .cert-badge{
+    display:inline-flex; align-items:center; gap:8px;
+    margin-top:22px;
+    font-family:'JetBrains Mono', monospace;
+    font-size:12px; letter-spacing:0.04em;
+    color:var(--signal-cyan);
+    border:1px solid var(--signal-cyan);
+    border-radius:999px;
+    padding:6px 14px;
+    background: rgba(99,201,214,0.06);
+  }
+
+  /* projects */
+  .project-grid{
+    display:grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  @media (max-width:760px){ .project-grid{ grid-template-columns: 1fr; } }
+
+  .project-card{
+    border:1px solid var(--blueprint-line);
+    border-radius:var(--radius);
+    padding:22px 22px 20px;
+    background: rgba(14,27,43,0.4);
+    display:flex; flex-direction:column;
+    transition: border-color .2s ease, transform .2s ease;
+  }
+  .project-card:hover{ border-color:var(--signal-cyan); transform: translateY(-2px); }
+  .project-card.featured{ grid-column: 1 / -1; border-color: rgba(99,201,214,0.5); background: rgba(99,201,214,0.05); }
+  .project-kicker{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px; letter-spacing:0.08em; text-transform:uppercase;
+    color:var(--signal-amber); margin-bottom:6px;
+  }
+  .project-card h3{ font-size:18px; color:var(--paper); margin-bottom:10px; }
+  .project-card p{ font-size:14.5px; color:var(--paper-dim); margin-bottom:12px; }
+  .project-card ul.points{ padding-left:18px; margin-bottom:14px; }
+  .project-card ul.points li{ font-size:13.5px; color:var(--paper-dim); margin-bottom:5px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:6px; margin-top:auto; margin-bottom:14px; }
+  .tag-chip{
+    font-family:'JetBrains Mono', monospace;
+    font-size:11px;
+    color:var(--paper);
+    border:1px solid var(--blueprint-line);
+    border-radius:var(--radius);
+    padding:3px 8px;
+  }
+  .tag-chip.ai{ color:var(--signal-cyan); border-color:rgba(99,201,214,0.45); }
+  .project-link{ font-family:'JetBrains Mono', monospace; font-size:12.5px; }
+  .older-projects{
+    margin-top:28px;
+    font-size:13.5px; color:var(--paper-dim);
+  }
+  .older-projects a{ margin-right:4px; }
+
   /* experience timeline */
   .timeline{ position:relative; padding-left:26px; }
   .timeline::before{
@@ -330,8 +392,8 @@
     <div class="navlinks">
       <a href="#about">About</a>
       <a href="#skills">Stack</a>
-      <a href="#experience">Experience</a>
       <a href="#projects">Projects</a>
+      <a href="#experience">Experience</a>
       <a href="#contact">Contact</a>
     </div>
   </div>
@@ -339,11 +401,12 @@
 
 <header class="hero">
   <div class="wrap">
-    <div class="eyebrow mono">Software Engineer</div>
-    <h1>I build backend systems that hold up in production —<br> and use <em>AI</em> to build them better.</h1>
+    <div class="eyebrow mono">Software Engineer · Automation Engineer</div>
+    <h1>I build reliable backends and <em>AI-powered automation</em> that takes work off people's plates.</h1>
     <p class="hero-sub">
-      5+ years shipping Java / Spring Boot backends for companies in the US and Nigeria — microservice migrations, Kafka-driven pipelines, secure APIs, and payment system integrations using Python and FastAPI. For the past year, AI tooling (Claude, Claude Code) has become part of how I design, debug, and test every one of those systems.
+      5+ years shipping production systems with Python, FastAPI, Java and Spring Boot for companies in the US and Nigeria. Today I focus on automation: services that read documents, triage inboxes, turn meetings into tasks and run scheduled workflows, using Claude with the validation, testing and judgement that make AI safe to put in production.
     </p>
+    <div class="cert-badge">★ Certified Claude Developer (CCDV-F)</div>
     <div class="hero-cta">
       <a class="btn primary" href="#contact">Get in touch</a>
       <a class="btn ghost" href="https://github.com/KabirYusuf" target="_blank" rel="noopener">View GitHub ↗</a>
@@ -360,22 +423,27 @@
     </div>
     <div class="about-grid">
       <div class="about-body">
-        <p><strong>I'm Kabir Yusuf</strong>, a software engineer with 5+ years building backend systems — REST APIs, microservices, message-driven pipelines — for companies including TightLine (USA) and TravelWay (Lagos). My core stack is Java and Spring Boot, with working experience in Python, Kafka, PostgreSQL, MySQL, and Docker.</p>
-        <p>Over the past year, AI-assisted development has become a real part of how I work — not a side experiment. I use <strong>Claude and Claude Code</strong> daily for system design, code review, debugging, refactoring, and test generation, and I've seen firsthand how much faster and more consistent delivery gets when AI is used with real engineering judgment behind it.</p>
-        <p>I bring a combination of solid engineering fundamentals, analytical thinking, and business awareness to the products I help build — backed by a Computer Science degree and training in business management and entrepreneurship.</p>
+        <p><strong>I'm Kabir Yusuf</strong>, a Software and Automation Engineer and <strong>Certified Claude Developer (CCDV-F)</strong>. For 5+ years I've worked on production systems end to end for companies including TightLine (USA) and TravelWay (Lagos): backend services, event-driven architectures, production debugging and large database migrations, with <strong>Python, FastAPI, Java and Spring Boot</strong>.</p>
+        <p>My focus now is <strong>automation engineering</strong>: building services where AI does real work inside a reliable system. That means document extraction pipelines, support-inbox triage with human approval, agents that use tools to create tasks, and scheduled jobs that publish and remind. Each pairs Claude's structured output and tool use with schema validation, deterministic business rules, background processing and tests.</p>
+        <p>I also help teams bring AI into their products and engineering processes, and I use <strong>Claude and Claude Code</strong> daily for design, code analysis, debugging, refactoring, testing, documentation and workflow automation. I see AI as a multiplier for strong engineering judgement, not a substitute for it. The value comes from knowing how to direct it, check its output and apply it responsibly.</p>
+        <p>A Computer Science degree and training in business management and entrepreneurship mean I start from the problem and build for measurable value. I'm open to backend, automation and AI-focused engineering roles.</p>
       </div>
       <div>
         <div class="stat-card">
           <div class="stat-num mono">5+ yrs</div>
-          <div class="stat-label">backend engineering, Java / Spring Boot</div>
+          <div class="stat-label">production engineering: Python / FastAPI, Java / Spring Boot</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num mono">CCDV-F</div>
+          <div class="stat-label">Certified Claude Developer</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num mono">5</div>
+          <div class="stat-label">open-source AI automation services: tested, Dockerised, CI-ready</div>
         </div>
         <div class="stat-card">
           <div class="stat-num mono">2</div>
-          <div class="stat-label">countries — production experience in the US and Nigerian markets</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-num mono">1 yr+</div>
-          <div class="stat-label">daily, hands-on use of Claude / Claude Code in real engineering work</div>
+          <div class="stat-label">countries: production experience in US and Nigerian markets</div>
         </div>
       </div>
     </div>
@@ -392,17 +460,56 @@
       <div class="skill-card">
         <h3>Languages</h3>
         <ul>
-          <li>Java</li>
           <li>Python</li>
+          <li>Java</li>
           <li>JavaScript</li>
         </ul>
       </div>
       <div class="skill-card">
         <h3>Backend Frameworks</h3>
         <ul>
+          <li>FastAPI, Pydantic, SQLModel</li>
           <li>Spring Boot</li>
           <li>Django, Django REST Framework</li>
-          <li>FastAPI</li>
+        </ul>
+      </div>
+      <div class="skill-card ai">
+        <h3>AI &amp; LLM Integration</h3>
+        <ul>
+          <li>Claude API (Anthropic SDK)</li>
+          <li>Tool use, agents &amp; structured output</li>
+          <li>Prompt design, prompt caching, vision</li>
+        </ul>
+      </div>
+      <div class="skill-card ai">
+        <h3>Automation</h3>
+        <ul>
+          <li>Background jobs, APScheduler, cron</li>
+          <li>Webhooks, Zapier / Make / n8n</li>
+          <li>Email (IMAP/SMTP), Trello, Slack APIs</li>
+        </ul>
+      </div>
+      <div class="skill-card ai">
+        <h3>AI-Assisted Development</h3>
+        <ul>
+          <li>Claude &amp; Claude Code, daily</li>
+          <li>Design, code analysis, debugging, refactoring</li>
+          <li>Test development, documentation, workflow automation</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Data &amp; Messaging</h3>
+        <ul>
+          <li>PostgreSQL, MySQL, SQLite, MongoDB</li>
+          <li>Redis, Kafka, RabbitMQ</li>
+        </ul>
+      </div>
+      <div class="skill-card">
+        <h3>Engineering Practice</h3>
+        <ul>
+          <li>REST APIs, microservices, event-driven design</li>
+          <li>pytest, JUnit, Mockito, TDD / BDD</li>
+          <li>Docker, Git, GitHub Actions CI</li>
         </ul>
       </div>
       <div class="skill-card">
@@ -411,29 +518,6 @@
           <li>React</li>
           <li>Vue.js</li>
           <li>Angular</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Data</h3>
-        <ul>
-          <li>PostgreSQL, MySQL, MongoDB</li>
-          <li>Redis, Kafka, RabbitMQ</li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Engineering Practice</h3>
-        <ul>
-          <li>Microservices, event-driven design</li>
-          <li>TDD / BDD, JUnit, Mockito</li>
-          <li>Docker, Git, CI-style delivery</li>
-        </ul>
-      </div>
-      <div class="skill-card ai">
-        <h3>AI-Assisted Development</h3>
-        <ul>
-          <li>Claude &amp; Claude Code — daily use</li>
-          <li>AI-assisted design, debugging, refactoring</li>
-          <li>Test generation &amp; documentation</li>
         </ul>
       </div>
       <div class="skill-card">
@@ -452,62 +536,116 @@
   <div class="wrap">
     <div class="section-head">
       <span class="section-num mono">03</span>
-      <h2>Projects</h2>
+      <h2>Projects: AI Automation</h2>
     </div>
-    <div class="skill-groups">
-      <div class="skill-card">
-        <h3>Library Management System</h3>
-        <ul>
-          <li>Java</li>
-          <li><a href="https://github.com/KabirYusuf/library-management-system" target="_blank" rel="noopener">View repo ↗</a></li>
+    <p style="color:var(--paper-dim); max-width:66ch; margin:-12px 0 28px; font-size:15px;">
+      Five production-style automation services built with Python, FastAPI and Claude. Each repo ships with tests that run offline against a mocked Claude client, plus Docker, GitHub Actions CI and a README covering its architecture and design decisions.
+    </p>
+    <div class="project-grid">
+      <article class="project-card featured">
+        <div class="project-kicker">AI agent · Tool use</div>
+        <h3>AI Meeting Actions</h3>
+        <p>Upload a meeting transcript and a Claude agent turns it into action: it creates an owned, dated task for every commitment, schedules agreed follow-ups and writes the minutes.</p>
+        <ul class="points">
+          <li>Agentic tool-use loop: Claude decides when to call <span class="mono">create_action_item</span>, <span class="mono">schedule_follow_up</span> and <span class="mono">finalize_summary</span></li>
+          <li>Invalid tool input goes back to the model as an error, so it corrects itself (e.g. "by Friday" becomes an ISO date)</li>
+          <li>Pushes tasks to Trello or any webhook; exports Markdown minutes and .ics calendar invites; parses Zoom/Teams VTT, SRT and DOCX</li>
         </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Transport Management System</h3>
-        <ul>
-          <li>Python</li>
+        <div class="tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">FastAPI</span>
+          <span class="tag-chip ai">Claude API</span>
+          <span class="tag-chip ai">Claude tool use</span>
+          <span class="tag-chip">SQLModel</span>
+          <span class="tag-chip">Trello API</span>
+          <span class="tag-chip">Webhooks</span>
+          <span class="tag-chip">pytest</span>
+        </div>
+        <a class="project-link" href="https://github.com/KabirYusuf/ai-meeting-actions" target="_blank" rel="noopener">View repo ↗</a>
+      </article>
+      <article class="project-card">
+        <div class="project-kicker">Document automation · Vision</div>
+        <h3>AI Invoice Extractor</h3>
+        <p>Upload invoices and receipts (PDF or photo). Claude extracts structured data, code checks it, and anything suspicious is flagged for human review before CSV export.</p>
+        <ul class="points">
+          <li>Claude vision with forced tool calls against a strict Pydantic schema, plus a validation-retry loop</li>
+          <li>Deterministic checks: line maths, subtotal + tax = total, date sanity, confidence threshold</li>
+          <li>Background processing, human correction endpoint, drag-and-drop UI</li>
         </ul>
-      </div>
-      <div class="skill-card">
-        <h3>E-Commerce Platform</h3>
-        <ul>
-          <li>Java</li>
-          <li><a href="https://github.com/KabirYusuf/e-commerce" target="_blank" rel="noopener">View repo ↗</a></li>
+        <div class="tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">FastAPI</span>
+          <span class="tag-chip ai">Claude vision</span>
+          <span class="tag-chip">Pydantic</span>
+          <span class="tag-chip">SQLite / Postgres</span>
+          <span class="tag-chip">Docker</span>
+        </div>
+        <a class="project-link" href="https://github.com/KabirYusuf/ai-invoice-extractor" target="_blank" rel="noopener">View repo ↗</a>
+      </article>
+      <article class="project-card">
+        <div class="project-kicker">Inbox automation · Human-in-the-loop</div>
+        <h3>AI Support Triage</h3>
+        <p>Watches a support inbox, contact form and API. Claude classifies, prioritises and routes each ticket, then drafts a reply grounded in a knowledge base for an agent to approve.</p>
+        <ul class="points">
+          <li>Scheduled IMAP polling with idempotent ingestion; SMTP replies</li>
+          <li>Knowledge base in a prompt-cached system prompt; escalation flags for refunds and account access</li>
+          <li>Jinja2 approval dashboard; optional auto-send for low-risk tickets</li>
         </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Todo Backend</h3>
-        <ul>
-          <li>Java</li>
-          <li><a href="https://github.com/KabirYusuf/todo-backEnd" target="_blank" rel="noopener">View repo ↗</a></li>
+        <div class="tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">FastAPI</span>
+          <span class="tag-chip ai">Claude API</span>
+          <span class="tag-chip">APScheduler</span>
+          <span class="tag-chip">Jinja2</span>
+          <span class="tag-chip">IMAP / SMTP</span>
+        </div>
+        <a class="project-link" href="https://github.com/KabirYusuf/ai-support-triage" target="_blank" rel="noopener">View repo ↗</a>
+      </article>
+      <article class="project-card">
+        <div class="project-kicker">Content automation · Scheduling</div>
+        <h3>AI Content Repurposer</h3>
+        <p>Turns one article URL into a LinkedIn post, X thread, newsletter section and Instagram caption in a saved brand voice, then publishes on a schedule.</p>
+        <ul class="points">
+          <li>Platform limits (e.g. 280-character tweets) enforced in the schema, so Claude rewrites when it overshoots</li>
+          <li>Brand voice profiles as few-shot examples; SSRF-safe article fetching</li>
+          <li>Scheduled publishing to Zapier / Make / Buffer webhooks</li>
         </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Unicoin — Crypto Exchange</h3>
-        <ul>
-          <li>Team-built cryptocurrency exchange application</li>
-          <li>Java</li>
-          <li><a href="https://github.com/KabirYusuf/unicoin-project-team-two" target="_blank" rel="noopener">View repo ↗</a></li>
+        <div class="tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">FastAPI</span>
+          <span class="tag-chip ai">Claude API</span>
+          <span class="tag-chip">BeautifulSoup</span>
+          <span class="tag-chip">APScheduler</span>
+          <span class="tag-chip">Webhooks</span>
+        </div>
+        <a class="project-link" href="https://github.com/KabirYusuf/ai-content-repurposer" target="_blank" rel="noopener">View repo ↗</a>
+      </article>
+      <article class="project-card">
+        <div class="project-kicker">Career automation · Honesty checks</div>
+        <h3>AI Resume Tailor &amp; Job Tracker</h3>
+        <p>Scores fit for a job, tailors the resume and writes a cover letter as Word documents, then tracks each application and sends follow-up reminders.</p>
+        <ul class="points">
+          <li>One structured Claude call returns fit analysis, resume and cover letter together</li>
+          <li>Code cross-checks every employer, metric, skill and certification against the original resume</li>
+          <li>ATS-friendly DOCX output; daily Slack/webhook reminders for applications that go quiet</li>
         </ul>
-      </div>
-      <div class="skill-card">
-        <h3>Credit Card Verification (FE)</h3>
-        <ul>
-          <li>Frontend app for credit card verification</li>
-          <li>JavaScript</li>
-          <li><a href="https://github.com/KabirYusuf/levelUpCCVerification-FE" target="_blank" rel="noopener">View repo ↗</a></li>
-        </ul>
-      </div>
-      <div class="skill-card">
-        <h3>ArticleBlog</h3>
-        <ul>
-          <li>Blog application built with Vue.js and Spring Boot</li>
-          <li><a href="https://github.com/KabirYusuf/ArticleBlog" target="_blank" rel="noopener">View repo ↗</a></li>
-        </ul>
-      </div>
+        <div class="tags">
+          <span class="tag-chip">Python</span>
+          <span class="tag-chip">FastAPI</span>
+          <span class="tag-chip ai">Claude API</span>
+          <span class="tag-chip">python-docx</span>
+          <span class="tag-chip">pypdf</span>
+          <span class="tag-chip">APScheduler</span>
+        </div>
+        <a class="project-link" href="https://github.com/KabirYusuf/ai-resume-tailor" target="_blank" rel="noopener">View repo ↗</a>
+      </article>
     </div>
-    <p style="margin-top:20px; font-size:13.5px; color:var(--paper-dim);">
-      More on <a href="https://github.com/KabirYusuf" target="_blank" rel="noopener">GitHub — 43 repositories ↗</a>
+    <p class="older-projects">
+      Earlier work (Java / Spring Boot):
+      <a href="https://github.com/KabirYusuf/e-commerce" target="_blank" rel="noopener">E-Commerce Platform</a> ·
+      <a href="https://github.com/KabirYusuf/unicoin-project-team-two" target="_blank" rel="noopener">Unicoin Crypto Exchange</a> ·
+      <a href="https://github.com/KabirYusuf/ArticleBlog" target="_blank" rel="noopener">ArticleBlog</a> ·
+      <a href="https://github.com/KabirYusuf" target="_blank" rel="noopener">more on GitHub ↗</a>
     </p>
   </div>
 </section>
@@ -577,7 +715,7 @@
       <a href="tel:+2348065923833">+234 806 592 3833</a>
       <a href="mailto:kabir.yusuf@example.com">Email</a>
     </div>
-    <div class="footnote mono">Abuja, Nigeria — built with Java, Spring Boot, and AI-assisted development.</div>
+    <div class="footnote mono">Abuja, Nigeria · Software &amp; Automation Engineer · Python, FastAPI, Java, Spring Boot and Claude.</div>
   </div>
 </footer>
 
